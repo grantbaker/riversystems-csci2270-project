@@ -18,22 +18,32 @@ int main(int argc, char** argv) {
         cout << "\\_| \\_|_| \\_/ \\___|_|    \\____/ \\__, |___/\\__\\___|_| |_| |_|___/" << endl;
         cout << "                                 __/ |                          " << endl;
         cout << "                                |___/                           " << endl;
-        cout << rivers->getMonth() << ", " << rivers->getYear() << endl;
+        cout << "Year " << rivers->getYear() << ", Week " << rivers->getWeek() << endl;
+        cout << "================================================================" << endl;
+        /*rivers->quickPrint();
+        cout << "================================================================" << endl;*/
         cout << "Select an option:" << endl;
-        cout << "1. Next Month" << endl;
-        cout << "2. " << endl;
-        cout << "3. " << endl;
-        cout << "" << endl;
+        cout << "1. Next Week" << endl;
+        cout << "2. Random Storm" << endl;
+        cout << "3. Targeted Storm" << endl;
+        cout << "4. Print" << endl;
+        cout << "5. Print Full" << endl;
         cin >> sel;
         switch(sel) {
         case 1:
-
+            rivers->nextWeek();
             break;
         case 2:
 
             break;
         case 3:
 
+            break;
+        case 4:
+            rivers->quickPrint();
+            break;
+        case 5:
+            rivers->print();
             break;
         default:
             cout << "Exiting..." << endl;
