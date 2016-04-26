@@ -1,11 +1,9 @@
 #include "RiverGraph.h"
 
-RiverGraph::RiverGraph()
-{
-    //ctor
+RiverGraph::RiverGraph() {
+
 }
 
-RiverGraph::~RiverGraph()
-{
-    //dtor
+RiverGraph::~RiverGraph() {
+
 }
