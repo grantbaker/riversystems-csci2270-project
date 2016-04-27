@@ -77,14 +77,14 @@ void RiverGraph::print() {
     int i,j;
     int flowOut;
     FlowStation* tmp;
-    for (i=0; i<RiverGraph::stations.size(); i++) {
+    for (i=0; (unsigned)i<RiverGraph::stations.size(); i++) {
         tmp = RiverGraph::stations[i];
         std::cout<<tmp->name<<":"<<std::endl;
         if (tmp->next)
             std::cout<<"- Flows into: "<<tmp->next->name<<std::endl;
         if (!tmp->isSource) {
             std::cout<<"- Sources:";
-            for (j=0; j<tmp->prev.size(); j++) {
+            for (j=0; (unsigned)j<tmp->prev.size(); j++) {
                 std::cout<<" "<<tmp->prev[j]->name;
             }
             std::cout<<std::endl;
@@ -94,7 +94,7 @@ void RiverGraph::print() {
         flowOut=tmp->flow;
         if (tmp->out.size()!=0) {
             std::cout<<"- Connected Cities:";
-            for (j=0; j<tmp->out.size(); j++) {
+            for (j=0; (unsigned)j<tmp->out.size(); j++) {
                 std::cout<<" "<<tmp->out[j]->name<<" ("<<tmp->out[j]->flow<<")";\
                 flowOut-=tmp->out[j]->flow;
             }
@@ -111,9 +111,9 @@ void RiverGraph::print() {
 }
 
 void RiverGraph::quickPrint() {
-    int i,j;
+    int i;
     FlowStation* tmp;
-    for (i=0; i<RiverGraph::stations.size(); i++) {
+    for (i=0; (unsigned)i<RiverGraph::stations.size(); i++) {
         tmp = RiverGraph::stations[i];
         std::cout<<tmp->name<<": "<<tmp->flow<<std::endl;
 
@@ -141,9 +141,9 @@ void RiverGraph::updateFlow(FlowStation* fs) {
     int i,j,sub;
     if (!fs->isSource) {
         fs->flow = 0;
-        for (i=0; i<fs->prev.size(); i++) {
+        for (i=0; (unsigned)i<fs->prev.size(); i++) {
                 sub = 0;
-            for (j=0; j<fs->prev[i]->out.size(); j++) {
+            for (j=0; (unsigned)j<fs->prev[i]->out.size(); j++) {
                 sub += fs->prev[i]->out[j]->flow;
             }
             fs->flow += fs->prev[i]->flow;
@@ -160,7 +160,7 @@ void RiverGraph::updateFlow(FlowStation* fs) {
 
 void RiverGraph::randomStorm() {
     int i;
-    for (i=0; i<RiverGraph::stations.size(); i++) {
+    for (i=0; (unsigned)i<RiverGraph::stations.size(); i++) {
         if ((double) std::rand()/(RAND_MAX) > 0.75) {
             RiverGraph::stations[i]->flow +=std::floor((double) 100+ (rand() %(8*RiverGraph::getSourceFlow())));
         }
@@ -181,7 +181,7 @@ void RiverGraph::connectCity(std::string cityName, std::string target, int flow)
 
 FlowStation* RiverGraph::findStation(std::string target) {
     int i;
-    for (i=0; i<RiverGraph::stations.size(); i++) {
+    for (i=0; (unsigned)i<RiverGraph::stations.size(); i++) {
         if (target.compare(RiverGraph::stations[i]->name) == 0) {
             return RiverGraph::stations[i];
         }
@@ -200,19 +200,20 @@ void RiverGraph::seasonalFlowAdjustment(std::string target, int flowAdj) {
 
 int RiverGraph::getCityConsumption(std::string city) {
     int i,j;
-    for (i=0; i<RiverGraph::stations.size(); i++) {
-        for (j=0; j<RiverGraph::stations[i]->out.size(); j++) {
+    for (i=0; (unsigned)i<RiverGraph::stations.size(); i++) {
+        for (j=0; (unsigned)j<RiverGraph::stations[i]->out.size(); j++) {
             if (city.compare(RiverGraph::stations[i]->out[j]->name) == 0) {
                 return RiverGraph::stations[i]->out[j]->flow;
             }
         }
     }
+    return -1;
 }
 
 void RiverGraph::adjustCityConsumption(std::string city, int newFlow) {
     int i,j;
-    for (i=0; i<RiverGraph::stations.size(); i++) {
-        for (j=0; j<RiverGraph::stations[i]->out.size(); j++) {
+    for (i=0; (unsigned)i<RiverGraph::stations.size(); i++) {
+        for (j=0; (unsigned)j<RiverGraph::stations[i]->out.size(); j++) {
             if (city.compare(RiverGraph::stations[i]->out[j]->name) == 0) {
                 RiverGraph::stations[i]->out[j]->flow = newFlow;
             }

@@ -1,17 +1,18 @@
-CC = g++
-CFLAGS = -Wall -Wextra -std=c99 -pedantic -g
-
+CC=g++
+CFLAGS=-Wall -Wextra -std=c++11 -pedantic -g
+DEPS = RiverGraph.h
+OBJ = main.o RiverGraph.o 
 PROG = RiverSystem
-SRC = main.cpp RiverGraph.cpp
-HDR = RiverGraph.h
-OBJ = $(SRC:.c=.o)
 
-$(PROG): $(OBJ)
-$(OBJ): $(HDR)
-TAGS: $(SRC) $(HDR)
-	etags $^
-tags: $(SRC) $(HDR)
-	ctags $^
+%.o: %.cpp $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+RiverSystem: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+
 .PHONY: clean
 clean:
-	$(RM) $(PROG) $(OBJ)
+	$(RM)  $(OBJ) $(PROG)
+.PHONY: cl
+cl:
+	$(RM) $(OBJ)
