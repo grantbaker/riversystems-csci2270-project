@@ -6,6 +6,11 @@ using namespace std;
 
 int main(int argc, char** argv) {
 
+    if (argc < 2) {
+        cout<<"Please specify a file."<<endl;
+        return 0;
+    }
+
     RiverGraph* rivers = new RiverGraph(argv[1]);
 
     int sel = 0;
