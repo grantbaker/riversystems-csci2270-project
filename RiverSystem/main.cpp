@@ -54,7 +54,8 @@ int main(int argc, char** argv) {
             break;
         case 4:
             cout<<"Flow Station: ";
-            cin>>target;
+            cin.ignore();
+            getline(cin,target);
             cout<<"Flow Increase: ";
             cin>>flow;
             rivers->targetedStorm(target, flow);
@@ -71,23 +72,26 @@ int main(int argc, char** argv) {
             break;
         case 7:
             cout<<"Flow Station: ";
-            cin>>target;
+            cin.ignore();
+            getline(cin, target);
             cout<<"Seasonal Flow Adjustment (%): ";
             cin>>flow;
             rivers->seasonalFlowAdjustment(target, flow);
             break;
         case 8:
             cout<<"City Name: ";
-            cin>>city;
+            cin.ignore();
+            getline(cin, city);
             cout<<"Flow Station: ";
-            cin>>target;
+            getline(cin ,target);
             cout<<"Flow Consumption: ";
             cin>>flow;
             rivers->connectCity(city, target, flow);
             break;
         case 9:
             cout<<"City Name: ";
-            cin>>city;
+            cin.ignore();
+            getline(cin, city);
             cout<<"Current Consumption: "<<rivers->getCityConsumption(city)<<endl;
             cout<<"New Consumption: ";
             cin>>flow;
