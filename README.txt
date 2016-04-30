@@ -17,13 +17,13 @@ How to Run:
 
 Within the /RiverSystem/ directory, there is a number of ways to run the River Systems program:
 
- - PREFERRED METHOD: There is a makefile in the directory. Run the makefile in a terminal by typing "make clean" and "make", then type "./RiverSystem <input file>". There is a sample input file provided, called "ColoradoSimple.txt". So:
+ - PREFERRED METHOD: There is a makefile in the directory. Run the makefile in a terminal by typing "make clean" and "make". Then, to run the program, type "./RiverSystem <input file>". There is a sample input file provided, called "ColoradoSimple.txt". So:
 
         make clean
 	make
 	./RiverSystem ColoradoSimple.txt
 
- - There is an executable called RiverSystem, which runs on Linux systems. To execute, in a terminal in the directory, type "./RiverSystem <input file>".
+ - There is an executable called RiverSystem, which runs on Linux systems. To execute, in a terminal in the directory, type "./RiverSystem <input file>". This is the latest compiled code; however, it may not work on all systems. Recompiling is the safest bet.
 
 - There is a Code::Blocks project file. Open the project file in Code::Blocks and click the "build and run" button at the top.
 

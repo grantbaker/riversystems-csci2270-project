@@ -162,7 +162,7 @@ void RiverGraph::randomStorm() {
     int i;
     for (i=0; (unsigned)i<RiverGraph::stations.size(); i++) {
         if ((double) std::rand()/(RAND_MAX) > 0.75) {
-            RiverGraph::stations[i]->flow +=std::floor((double) 100+ (rand() %(8*RiverGraph::getSourceFlow())));
+            RiverGraph::stations[i]->flow += std::floor((double) 100+ (rand() %(8*RiverGraph::getSourceFlow())));
         }
     }
 
@@ -170,13 +170,21 @@ void RiverGraph::randomStorm() {
 
 void RiverGraph::targetedStorm(std::string target, int flowIncrease) {
     FlowStation* fs = RiverGraph::findStation(target);
-    fs->flow += flowIncrease;
+    if (fs) {
+        fs->flow += flowIncrease;
+    } else {
+        std::cout<<"Error: Invalid target."<<std::endl;
+    }
 }
 
 void RiverGraph::connectCity(std::string cityName, std::string target, int flow) {
     City* newcity = new City(cityName, flow);
     FlowStation* fs = RiverGraph::findStation(target);
-    fs->out.push_back(newcity);
+    if (fs) {
+        fs->out.push_back(newcity);
+    } else {
+        std::cout<<"Error: Invalid target."<<std::endl;
+    }
 }
 
 FlowStation* RiverGraph::findStation(std::string target) {
@@ -194,7 +202,7 @@ void RiverGraph::seasonalFlowAdjustment(std::string target, int flowAdj) {
     if (fs->isSource) {
         fs->flowScaling = flowAdj;
     } else {
-        std::cout<<"Error"<<std::endl;
+        std::cout<<"Error: Not a source station."<<std::endl;
     }
 }
 
@@ -216,7 +224,9 @@ void RiverGraph::adjustCityConsumption(std::string city, int newFlow) {
         for (j=0; (unsigned)j<RiverGraph::stations[i]->out.size(); j++) {
             if (city.compare(RiverGraph::stations[i]->out[j]->name) == 0) {
                 RiverGraph::stations[i]->out[j]->flow = newFlow;
+                return;
             }
         }
     }
+    std::cout<<"Error: Invalid target."<<std::endl;
 }

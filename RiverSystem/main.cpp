@@ -92,10 +92,14 @@ int main(int argc, char** argv) {
             cout<<"City Name: ";
 	    cin.ignore();
             getline(cin,city);
-            cout<<"Current Consumption: "<<rivers->getCityConsumption(city)<<endl;
-            cout<<"New Consumption: ";
-            cin>>flow;
-            rivers->adjustCityConsumption(city, flow);
+            if (rivers->getCityConsumption(city) == -1) {
+                cout<<"Error: Invalid city."<<endl;
+            } else {
+                cout<<"Current Consumption: "<<rivers->getCityConsumption(city)<<endl;
+                cout<<"New Consumption: ";
+                cin>>flow;
+                rivers->adjustCityConsumption(city, flow);
+            }
             break;
         default:
             cout << "Exiting..." << endl;
